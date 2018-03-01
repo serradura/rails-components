@@ -13,7 +13,9 @@
 
   <tbody>
     <% @blogs.each do |blog| %>
-      <%= component(:row, blog: blog) %>
+      <%= component(:row, blog: blog) do %>
+        <span style="color: blue">Ahoy!</span>
+      <% end %>
     <% end %>
   </tbody>
 </table>
