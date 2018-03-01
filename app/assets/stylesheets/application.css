@@ -11,5 +11,6 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require blogs/components/index
  *= require_self
  */

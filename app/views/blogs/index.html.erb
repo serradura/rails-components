@@ -12,9 +12,9 @@
   </thead>
 
   <tbody>
-    <% @blogs.each do |blog| %>
+    <% @blogs.each.with_index do |blog, index| %>
       <%= component(:row, blog: blog) do %>
-        <span style="color: blue">Ahoy!</span>
+        <strong>Ahoy<%= '!' * (index+1) %></strong>
       <% end %>
     <% end %>
   </tbody>

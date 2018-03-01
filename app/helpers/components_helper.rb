@@ -20,6 +20,6 @@ module ComponentsHelper
   private
 
   def component_path(namespace, name)
-    "#{namespace}/components/#{name}/show"
+    "#{namespace}/components/#{name}/#{name}"
   end
 end
