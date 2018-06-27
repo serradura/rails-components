@@ -12,10 +12,8 @@
   </thead>
 
   <tbody>
-    <% @blogs.each.with_index do |blog, index| %>
-      <%= component(:row, blog: blog) do %>
-        <strong>Ahoy<%= '!' * (index+1) %></strong>
-      <% end %>
+    <% @blogs.each_with_index do |blog, index| %>
+      <%= blogs_table_row(blog) %>
     <% end %>
   </tbody>
 </table>
