@@ -10,9 +10,23 @@ Related resources:
 Approaches:
 ----------
 
-Apply the examples below in `app/blogs/index.html.erb`.
+Test the below examples in `app/blogs/index.html.erb`.
 
-**#1 Components based on Rails partials**
+**#1 PORO helper components**
+
+```erb
+<%= blogs_table_row(blog) %>
+```
+
+```erb
+<%=
+  blogs_table_row blog, -> do
+    content_tag(:strong, "Ahoy #{'!' * (index+1)}")
+  end
+%>
+```
+
+**#2 Rails partial components**
 
 ```erb
 <%= component(:row, blog: blog) %>
@@ -23,18 +37,3 @@ Apply the examples below in `app/blogs/index.html.erb`.
   <strong>Ahoy<%= '!' * (index+1) %></strong>
 <% end %>
 ```
-**#2 PORO components**
-
-```erb
-<%= blogs_table_row(blog) %>
-```
-
-```erb
-<%=
-  blogs_table_row(blog, -> h do
-    h.content_tag(:strong) { "Ahoy #{'!' * (index+1)}" }
-  end)
-%>
-```
-
-

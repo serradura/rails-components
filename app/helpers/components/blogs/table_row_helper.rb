@@ -2,35 +2,32 @@ module Components::Blogs::TableRowHelper
 
   class Component < Components::Base
     delegate :td, :tr, to: :tags
+    delegate :link_to, :edit_blog_path, to: :view
 
     def call(blog, custom_content)
-      tr.(
-        cells(blog, custom_content)
-      )
+      tr cells(blog, custom_content)
     end
 
     private
 
     def cells(blog, custom_content)
       [
-        td.(blog.title),
-        td.(blog.body),
-        td.(-> h { h.link_to 'Show', blog }),
-        td.(-> h { h.link_to 'Edit', h.edit_blog_path(blog) }),
-        td.(-> h do
-          h.link_to 'Destroy', blog, method: :delete,
-                                     data: { confirm: 'Are you sure?' }
-        end),
-        unless custom_content.nil?
-          td.(custom_content, {
-            data: { 'row-alert-text': true }, class: 'row-el--blue'
-          })
-        end
-      ].tap(&:compact!)
+        td(blog.title),
+        td(blog.body),
+        td(link_to 'Show', blog),
+        td(link_to 'Edit', edit_blog_path(blog)),
+        td(link_to 'Destroy', blog, method: :delete,
+                                    data: { confirm: 'Are you sure?' }),
+        td_with(custom_content: custom_content)
+      ]
     end
 
-    def tags
-      @tags ||= Components::Tags::Helpers.new(view)
+    def td_with(custom_content:)
+      return if custom_content.nil?
+
+      content = custom_content.is_a?(Proc) ? custom_content.() : custom_content
+
+      td content, class: 'row-el--blue', data: { 'row-alert-text': true }
     end
   end
 

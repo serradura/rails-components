@@ -1,21 +1,19 @@
 module Components
-  module Contract
-    extend ActiveSupport::Concern
-
-    included do
-      attr_reader :view
+  class Base
+    def initialize(view)
+      @view = view
     end
 
     def call
       raise NotImplementedError
     end
-  end
 
-  class Base
-    include Contract
+    private
 
-    def initialize(view)
-      @view = view
+    def view; @view; end
+
+    def tags
+      @tags ||= Components::Tags.new(view)
     end
   end
 end
