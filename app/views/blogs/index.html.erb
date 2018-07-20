@@ -12,7 +12,9 @@
   </thead>
 
   <tbody>
-    <% @blogs.each_with_index do |blog, index| %>
+    <%#= safe_join @blogs.map(&method(:blogs_table_row)) %>
+
+    <% @blogs.each do |blog| %>
       <%= blogs_table_row(blog) %>
     <% end %>
   </tbody>
